@@ -7,12 +7,17 @@
 
 import UIKit
 
-class PlayerController: UIViewController {
+final class PlayerController: UIViewController {
 
+//    MARK: - ViewController lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        commonInit()
     }
-
-
+    
+//    MARK: - private func
+    private func commonInit() {
+        setBackgroundColor()
+    }
+    
 }

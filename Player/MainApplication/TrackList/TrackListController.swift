@@ -26,7 +26,7 @@ final class TrackListController: UIViewController {
     
 //    MARK: - private func
     private func commonInit() {
-        setBackgroundColor()
+        setupBackgroundColor()
 
         view.addSubview(trackListView)
         NSLayoutConstraint.activate([

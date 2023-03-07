@@ -8,7 +8,7 @@
 import UIKit
 
 extension UIViewController {
-    func setBackgroundColor() {
+    func setupBackgroundColor() {
         view.backgroundColor = .white
     }
 }

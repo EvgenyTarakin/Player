@@ -14,9 +14,7 @@ final class TrackCell: UITableViewCell {
     
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [nameLabel, timeLabel])
-        stackView.spacing = 16
-        stackView.axis = .horizontal
-        stackView.distribution = .fill
+        stackView.setupStackViewParameters(axis: .horizontal, spacing: 16, distribution: .fillProportionally)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
         return stackView

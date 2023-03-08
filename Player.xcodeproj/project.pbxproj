@@ -86,7 +86,7 @@
 				1B36C0BE29B610F70073CA6B /* Extensions */,
 				1B36C0B229B605330073CA6B /* StartApplication */,
 				1B36C0B329B609FF0073CA6B /* MainApplication */,
-				1B36C0BD29B60B5B0073CA6B /* Tracks */,
+				1B36C0D629B870830073CA6B /* Model */,
 				1B36C0B629B60ACB0073CA6B /* Assets */,
 				1B36C0AB29B604BC0073CA6B /* Info.plist */,
 			);
@@ -146,18 +146,13 @@
 			path = Assets;
 			sourceTree = "<group>";
 		};
-		1B36C0BD29B60B5B0073CA6B /* Tracks */ = {
+		1B36C0BD29B60B5B0073CA6B /* Player */ = {
 			isa = PBXGroup;
 			children = (
 				1B36C0D229B756480073CA6B /* Player.swift */,
-				1B36C0D429B756D90073CA6B /* Track.swift */,
-				1B36C0C929B7530F0073CA6B /* DIE ANTWOORD - Cookie Thumper.mp3 */,
-				1B36C0CB29B7530F0073CA6B /* Eminem - Mokingbird.mp3 */,
-				1B36C0CC29B7530F0073CA6B /* Imagine Dragons - Bones.mp3 */,
-				1B36C0C829B7530E0073CA6B /* Imagine Dragons, JID - Enemy.mp3 */,
-				1B36C0CA29B7530F0073CA6B /* The Weeknd - The Hills.mp3 */,
+				1B36C0D729B8B6150073CA6B /* Tracks */,
 			);
-			path = Tracks;
+			path = Player;
 			sourceTree = "<group>";
 		};
 		1B36C0BE29B610F70073CA6B /* Extensions */ = {
@@ -176,6 +171,27 @@
 				1B36C0C229B612920073CA6B /* TrackCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		1B36C0D629B870830073CA6B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1B36C0BD29B60B5B0073CA6B /* Player */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1B36C0D729B8B6150073CA6B /* Tracks */ = {
+			isa = PBXGroup;
+			children = (
+				1B36C0D429B756D90073CA6B /* Track.swift */,
+				1B36C0C929B7530F0073CA6B /* DIE ANTWOORD - Cookie Thumper.mp3 */,
+				1B36C0CB29B7530F0073CA6B /* Eminem - Mokingbird.mp3 */,
+				1B36C0CC29B7530F0073CA6B /* Imagine Dragons - Bones.mp3 */,
+				1B36C0C829B7530E0073CA6B /* Imagine Dragons, JID - Enemy.mp3 */,
+				1B36C0CA29B7530F0073CA6B /* The Weeknd - The Hills.mp3 */,
+			);
+			path = Tracks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -29,6 +29,7 @@ final class PlayerController: UIViewController {
 //    MARK: - private func
     private func commonInit() {
         setupBackgroundColor()
+        player.delegate = self
         
         view.addSubview(playerView)
         NSLayoutConstraint.activate([
@@ -39,11 +40,16 @@ final class PlayerController: UIViewController {
         ])
     }
     
+    private func turnOnTrack() {
+        let track = player.tracks[player.getIndexTrack()]
+        playerView.configurate(name: track.name, author: track.author, stringTime: track.stringTime)
+        playerView.changeStatePlayButton(player.isPlaying)
+    }
+    
 //    MARK: - func
     func configurate(_ indexTrack: Int) {
         player.turnOnNewTrack(indexTrack)
-        playerView.configurate(name: player.tracks[indexTrack].name, author: player.tracks[indexTrack].author, time: "00:00")
-        playerView.changeStatePlayButton(player.isPlaying)
+        turnOnTrack()
     }
     
 }
@@ -65,13 +71,21 @@ extension PlayerController: PlayerViewDelegate {
     
     func didSelectPreviousButton() {
         player.turnOnPreviousTrack()
-        playerView.configurate(name: player.tracks[player.getIndexTrack()].name, author: player.tracks[player.getIndexTrack()].author, time: "00:00")
-        playerView.changeStatePlayButton(player.isPlaying)
+        turnOnTrack()
     }
     
     func didSelectNextButton() {
         player.turnOnNextTrack()
-        playerView.configurate(name: player.tracks[player.getIndexTrack()].name, author: player.tracks[player.getIndexTrack()].author, time: "00:00")
-        playerView.changeStatePlayButton(player.isPlaying)
+        turnOnTrack()
+    }
+}
+
+extension PlayerController: PlayerDelegate {
+    func updateTimer(stringTime: String, time: Float) {
+        playerView.updateTimerLabel(stringTime: stringTime, timeSlider: time)
+    }
+    
+    func turnOnNextTrack() {
+        didSelectNextButton()
     }
 }

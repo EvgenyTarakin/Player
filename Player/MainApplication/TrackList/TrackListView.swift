@@ -69,7 +69,7 @@ extension TrackListView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TrackCell.reuseIdentifier, for: indexPath) as? TrackCell else { return UITableViewCell() }
-        cell.configurate(name: trackList[indexPath.row].name + " - " + trackList[indexPath.row].author, time: "00:00")
+        cell.configurate(name: trackList[indexPath.row].name + " - " + trackList[indexPath.row].author, time: trackList[indexPath.row].stringTime)
         
         return cell
     }

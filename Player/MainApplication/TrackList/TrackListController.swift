@@ -30,6 +30,7 @@ final class TrackListController: UIViewController {
 //    MARK: - private func
     private func commonInit() {
         setupBackgroundColor()
+        player.getTimeTracks()
 
         view.addSubview(trackListView)
         NSLayoutConstraint.activate([

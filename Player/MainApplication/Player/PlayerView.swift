@@ -66,7 +66,7 @@ final class PlayerView: UIView {
     }()
     
     private lazy var timeLabelsStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [timerLabel, timeTrackLabel])
+        let stackView = UIStackView(arrangedSubviews: [timerLabel, trackTimeLabel])
         stackView.setupStackViewParameters(axis: .horizontal, distribution: .fillEqually)
         
         return stackView
@@ -74,14 +74,12 @@ final class PlayerView: UIView {
     
     private lazy var timerLabel: UILabel = {
         let label = UILabel()
-        label.setupLabelParameters(text: "00:00", size: 14, textAligment: .left)
 
         return label
     }()
     
-    private lazy var timeTrackLabel: UILabel = {
+    private lazy var trackTimeLabel: UILabel = {
         let label = UILabel()
-        label.setupLabelParameters(text: "00:00", size: 14, textAligment: .right)
         
         return label
     }()
@@ -89,6 +87,7 @@ final class PlayerView: UIView {
     private lazy var slider: UISlider = {
         let slider = UISlider()
         slider.setThumbImage(UIImage(), for: .normal)
+        slider.isUserInteractionEnabled = false
         
         return slider
     }()
@@ -113,7 +112,6 @@ final class PlayerView: UIView {
         let button = UIButton()
         button.setImage(.init(systemName: "play"), for: .normal)
         button.addTarget(self, action: #selector(tapPlayButton), for: .touchUpInside)
-        
         
         return button
     }()
@@ -160,10 +158,16 @@ final class PlayerView: UIView {
     }
     
 //    MARK: - func
-    func configurate(name: String, author: String, time: String) {
+    func configurate(name: String, author: String, stringTime: String) {
         nameTrackLabel.setupLabelParameters(text: name, size: 20, textAligment: .center)
         authorLabel.setupLabelParameters(text: author, size: 16, textAligment: .center)
-        timeTrackLabel.setupLabelParameters(text: time, size: 14, textAligment: .right)
+        trackTimeLabel.setupLabelParameters(text: stringTime, size: 14, textAligment: .right)
+        timerLabel.setupLabelParameters(text: "00:00", size: 14)
+    }
+    
+    func updateTimerLabel(stringTime: String, timeSlider: Float) {
+        slider.value = timeSlider
+        timerLabel.text = stringTime
     }
     
     func changeStatePlayButton(_ state: Bool) {

@@ -6,12 +6,11 @@
 //
 
 import UIKit
-import MediaPlayer
 
 final class PlayerController: UIViewController {
     
 //    MARK: - property
-    private lazy var player = AVPlayer()
+    private lazy var player = Player.shared
     
     private lazy var playerView: PlayerView = {
         let playerView = PlayerView()
@@ -41,14 +40,38 @@ final class PlayerController: UIViewController {
     }
     
 //    MARK: - func
-    func configuratePlayer() {
-        
+    func configurate(_ indexTrack: Int) {
+        player.turnOnNewTrack(indexTrack)
+        playerView.configurate(name: player.tracks[indexTrack].name, author: player.tracks[indexTrack].author, time: "00:00")
+        playerView.changeStatePlayButton(player.isPlaying)
     }
     
 }
 
+// MARK: - extension
 extension PlayerController: PlayerViewDelegate {
     func didSelectCloseButton() {
         dismiss(animated: true)
+    }
+    
+    func didSelectPlayButton() {
+        if player.isPlaying {
+            player.pauseTrack()
+        } else {
+            player.playTrack()
+        }
+        playerView.changeStatePlayButton(player.isPlaying)
+    }
+    
+    func didSelectPreviousButton() {
+        player.turnOnPreviousTrack()
+        playerView.configurate(name: player.tracks[player.getIndexTrack()].name, author: player.tracks[player.getIndexTrack()].author, time: "00:00")
+        playerView.changeStatePlayButton(player.isPlaying)
+    }
+    
+    func didSelectNextButton() {
+        player.turnOnNextTrack()
+        playerView.configurate(name: player.tracks[player.getIndexTrack()].name, author: player.tracks[player.getIndexTrack()].author, time: "00:00")
+        playerView.changeStatePlayButton(player.isPlaying)
     }
 }

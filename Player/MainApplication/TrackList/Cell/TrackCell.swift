@@ -54,7 +54,7 @@ final class TrackCell: UITableViewCell {
     
 //    MARK: - private func
     private func commonInit() {
-        selectionStyle = .gray
+        selectionStyle = .none
         
         addSubview(stackView)
         addSubview(separator)

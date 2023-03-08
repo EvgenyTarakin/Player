@@ -9,13 +9,14 @@ import UIKit
 
 // MARK: - protocol
 protocol TrackListViewDelegate: AnyObject {
-    func didSelectCell()
+    func didSelectCell(_ index: Int)
 }
 
 final class TrackListView: UIView {
     
 //    MARK: - property
     weak var delegate: TrackListViewDelegate?
+    private lazy var trackList: [Track] = []
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -49,27 +50,31 @@ final class TrackListView: UIView {
             tableView.rightAnchor.constraint(equalTo: rightAnchor)
         ])
     }
+    
+//    MARK: - func
+    func configurate(_ tracks: [Track]) {
+        trackList = tracks
+        tableView.reloadData()
+    }
 
 }
 
 // MARK: - extension
-extension TrackListView: UITableViewDelegate {
-    
-}
+extension TrackListView: UITableViewDelegate { }
 
 extension TrackListView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return trackList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TrackCell.reuseIdentifier, for: indexPath) as? TrackCell else { return UITableViewCell() }
-        cell.configurate(name: "name name name name name name name name name", time: "00:00")
+        cell.configurate(name: trackList[indexPath.row].name + " - " + trackList[indexPath.row].author, time: "00:00")
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.didSelectCell()
+        delegate?.didSelectCell(indexPath.row)
     }
 }

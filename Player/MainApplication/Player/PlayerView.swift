@@ -10,6 +10,9 @@ import UIKit
 // MARK: - protocol
 protocol PlayerViewDelegate: AnyObject {
     func didSelectCloseButton()
+    func didSelectPlayButton()
+    func didSelectPreviousButton()
+    func didSelectNextButton()
 }
 
 final class PlayerView: UIView {
@@ -37,7 +40,7 @@ final class PlayerView: UIView {
     }()
     
     private lazy var namesStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [nameTrackLabel, nameAuthorLabel])
+        let stackView = UIStackView(arrangedSubviews: [nameTrackLabel, authorLabel])
         stackView.setupStackViewParameters(axis: .vertical, spacing: 8, distribution: .fillProportionally)
         
         return stackView
@@ -45,14 +48,12 @@ final class PlayerView: UIView {
     
     private lazy var nameTrackLabel: UILabel = {
         let label = UILabel()
-        label.setupLabelParameters(text: "NAME", size: 20, textAligment: .center)
         
         return label
     }()
     
-    private lazy var nameAuthorLabel: UILabel = {
+    private lazy var authorLabel: UILabel = {
         let label = UILabel()
-        label.setupLabelParameters(text: "Author", size: 16, textAligment: .center)
         
         return label
     }()
@@ -103,7 +104,7 @@ final class PlayerView: UIView {
     private lazy var previousButton: UIButton = {
         let button = UIButton()
         button.setImage(.init(systemName: "backward.end"), for: .normal)
-        button.imageView?.scalesLargeContentImage = true
+        button.addTarget(self, action: #selector(tapPreviousButton), for: .touchUpInside)
         
         return button
     }()
@@ -111,6 +112,8 @@ final class PlayerView: UIView {
     private lazy var playButton: UIButton = {
         let button = UIButton()
         button.setImage(.init(systemName: "play"), for: .normal)
+        button.addTarget(self, action: #selector(tapPlayButton), for: .touchUpInside)
+        
         
         return button
     }()
@@ -118,6 +121,7 @@ final class PlayerView: UIView {
     private lazy var nextButton: UIButton = {
         let button = UIButton()
         button.setImage(.init(systemName: "forward.end"), for: .normal)
+        button.addTarget(self, action: #selector(tapNextButton), for: .touchUpInside)
         
         return button
     }()
@@ -155,9 +159,36 @@ final class PlayerView: UIView {
         ])
     }
     
+//    MARK: - func
+    func configurate(name: String, author: String, time: String) {
+        nameTrackLabel.setupLabelParameters(text: name, size: 20, textAligment: .center)
+        authorLabel.setupLabelParameters(text: author, size: 16, textAligment: .center)
+        timeTrackLabel.setupLabelParameters(text: time, size: 14, textAligment: .right)
+    }
+    
+    func changeStatePlayButton(_ state: Bool) {
+        if !state {
+            playButton.setImage(.init(systemName: "play"), for: .normal)
+        } else {
+            playButton.setImage(.init(systemName: "pause"), for: .normal)
+        }
+    }
+    
 //    MARK: - obj-c
     @objc private func tapCloseButton() {
         delegate?.didSelectCloseButton()
+    }
+    
+    @objc private func tapPlayButton() {
+        delegate?.didSelectPlayButton()
+    }
+    
+    @objc private func tapPreviousButton() {
+        delegate?.didSelectPreviousButton()
+    }
+    
+    @objc private func tapNextButton() {
+        delegate?.didSelectNextButton()
     }
 
 }

@@ -10,9 +10,12 @@ import UIKit
 final class TrackListController: UIViewController {
     
 //    MARK: - property
+    private lazy var player = Player.shared
+    
     private lazy var trackListView: TrackListView = {
         let trackListView = TrackListView()
         trackListView.delegate = self
+        trackListView.configurate(player.tracks)
         trackListView.translatesAutoresizingMaskIntoConstraints = false
         
         return trackListView
@@ -41,8 +44,9 @@ final class TrackListController: UIViewController {
 
 // MARK: - extension
 extension TrackListController: TrackListViewDelegate {
-    func didSelectCell() {
+    func didSelectCell(_ index: Int) {
         let controller = PlayerController()
+        controller.configurate(index)
         if let sheet = controller.sheetPresentationController {
             sheet.detents = [.large()]
         }

@@ -170,8 +170,8 @@ final class PlayerView: UIView {
         timerLabel.text = stringTime
     }
     
-    func changeStatePlayButton(_ state: Bool) {
-        if !state {
+    func changeStatePlayButton(_ isPlaying: Bool) {
+        if !isPlaying {
             playButton.setImage(.init(systemName: "play"), for: .normal)
         } else {
             playButton.setImage(.init(systemName: "pause"), for: .normal)
